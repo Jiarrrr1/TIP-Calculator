@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIP Calculator</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            font-size: 22px;
+            background-color: rgb(228, 228, 228)   ;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        .calcCard {
+            border-radius: 10px;
+            transform: translateY(60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+            width: 480px;
+            padding: 2.3rem 3.4rem 2.3rem 3.5rem;
+            background-color: rgb(168, 168, 168);
+
+
+        }
+
+        .givenInput {
+            display: flex;
+            flex-direction: column;
+            gap: .8rem;
+            border-radius: 10px;
+
+        }
+
+        .inputs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem 1.5rem 2rem;
+            gap: .4rem;
+            background-color: rgb(100, 100, 100);
+            border-radius: 10px;
+        }
+
+        label {
+            
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: rgb(4, 51, 51);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        input,
+        select {
+            width: 10.4rem;
+            height: 2rem;
+            outline: none;
+            padding: 7px;
+            border: none;
+            border-bottom: solid  rgb(3, 77, 77) 2px ;
+            background-color: transparent;
+           color:  rgb(3, 77, 77);
+           text-align: center;
+           font-size: 1rem;
+
+        }
+
+        
+        option {
+            background-color:  rgb(3, 77, 77);
+            color: white;
+        }
+
+        ::placeholder {
+
+            padding-left: 1rem;
+            color:  rgb(3, 77, 77);
+        }
+
+        .button-con {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            width: 100%;
+            height: 2.8rem;
+            outline: none;
+            padding: 3px;
+            background-color:#022b2b ;
+            color:  rgb(226, 226, 226) ;
+            font-size: 1.2rem;
+            border: #022b2b solid 3px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: all ease-in-out .5s;
+        }
+
+        button:focus{
+            box-shadow: inset 500px 0 0  80px rgb(226, 226, 226) ;
+            color: #022b2b;
+        }
+
+        .button-con {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+
+        .result-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgb(0, 0, 0);
+            background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(5, 129, 129, 1) 100%);
+            color: white;
+            border-radius: 10px;
+
+        }
+
+        .result-form>header {
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 5px;
+            border-bottom: solid rgba(255, 255, 255, 0.719) 2px;
+
+        }
+
+        .result-con {
+            align-items: center;
+            display: grid;
+            grid-template-columns: 1fr .05fr 2fr;
+            grid-template-rows: repeat(3, 1fr);
+            grid-column-gap: 10px;
+            grid-row-gap: 0px;
+
+        }
+
+        .grid-gap {
+            background-color: rgba(219, 219, 219, 0.747);
+            width: .2rem;
+            height: 50%;
+        }
+
+        .result-con>h6,
+        p {
+            padding: 1rem;
+
+        }
+
+        .result-con>p {
+            display: flex;
+            justify-content: center;
+            opacity: 70%;
+            text-align: center;
+            letter-spacing: 2px;
+
+        }
+
+        .result {
+            font-size: 1rem;
+
+        }
+
+        h6 {
+            opacity: 70%;
+            letter-spacing: 2px;
+        }
+
+        h3 {
+            color: rgb(5, 129, 129);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <section class="calcCard">
+            <header>
+                <h3>Tip </h3>
+                <h3>Calculator</h3>
+            </header>
+            <section class="result-form">
+                <header>
+                    <p class="result-header">
+                        Result
+                    </p>
+                </header>
+                <div class="result-con">
+
+                    <h6> Total Tip</h6>
+                    <div class="grid-gap"></div>
+                    <p class="result percentage"></p>
+                    <h6>Contribution</h6>
+                    <div class="grid-gap"></div>
+                    <p class="result tip-value"> </p>
+                    <h6>Total Amount</h6>
+                    <div class="grid-gap"></div>
+                    <p class="result total-amount"></p>
+
+                </div>
+
+            </section>
+            <div class="givenInput">
+                <div class="inputs">
+                    <label for="totalBill">Bill </label>
+                    <input type="number" name="bill" id="totalBill" class="total-bill"
+                        placeholder="Input the total bill">
+
+                </div>
+                <div class="inputs">
+                    <label for="status">Tip Amount</label>
+                    <select name="status" id="status" class="status">
+                        <option value="25">25%-Execellent</option>
+                        <option value="20">20%-Very good</option>
+                        <option value="15">15%-Good</option>
+                        <option value="10">10%-Fair</option>
+                        <option value="5">5%-Bad</option>
+                    </select>
+                </div>
+                <div class="inputs">
+                    <label for="totalGuest">Split</label>
+                    <input type="number" name="guest" id="totalGuest" class="total-guest"
+                        placeholder="Input the total guest">
+                </div>
+            </div>
+
+            <section class="button-con">
+                <button class="calc-tip" id="calcTip">Calculate</button>
+                <button class="reset">Reset</button>
+            </section>
+
+        </section>
+    </div>
+</body>
+<script src="app.js"></script>
+
+</html>
